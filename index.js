@@ -143,7 +143,7 @@ async function run() {
     });
 
     //4# GET specific data from database
-    app.get("/products/:id", async (req, res) => {
+    app.get("/products/:id",verifyToken, async (req, res) => {
       const id = req.params.id;
 
       const query = {
@@ -170,7 +170,7 @@ async function run() {
       res.send(result);
     });
     // #6 get the sign in user product
-    app.get("/users/products", async (req, res) => {
+    app.get("/users/products",verifyToken, async (req, res) => {
       const email = req.query.email;
       const query = {};
       if (email) {
@@ -189,7 +189,7 @@ async function run() {
     });
 
     // GET SPECIFIC BID FOR A PRODUCT BY _id
-    app.get("/bids/:id", async (req, res) => {
+    app.get("/bids/:id",verifyToken, async (req, res) => {
       const id = req.params.id;
 
       const query = { product: id };
