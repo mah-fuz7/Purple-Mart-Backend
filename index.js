@@ -11,8 +11,10 @@ const port=process.env.PORT || 3000;
 // #middleware
 app.use(cors());
 app.use(express.json())
+// index.js
+const decoded = Buffer.from(process.env.FB_SERVICE_KEY, "base64").toString("utf8");
+const serviceAccount = JSON.parse(decoded);
 
-const serviceAccount = require("./snekers-deals-firebase-admin-key.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
@@ -263,7 +265,7 @@ res.send(result)
 })
 
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
+    // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
